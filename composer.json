@@ -1,0 +1,45 @@
+{
+    "name": "dejwcake/yahoo-finance",
+    "type": "library",
+    "description": "Yahoo Finance Service",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "David Běhal",
+            "email": "behal.david@gmail.com",
+            "homepage": "https://www.dejw.sk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.4",
+        "illuminate/contracts": "^8.0",
+        "illuminate/support": "^8.0",
+        "myclabs/php-enum": "^1.8",
+        "nesbot/carbon": "^2.53.1",
+        "php-http/discovery": "^1.6",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.4.2",
+        "phpunit/phpunit": "^9.3.3"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DejwCake\\YahooFinance\\YahooFinanceServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "DejwCake\\YahooFinance\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DejwCake\\YahooFinance\\Tests\\": "tests/"
+        }
+    }
+}

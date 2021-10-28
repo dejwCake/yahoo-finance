@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<ruleset name="YahooFinance">
+    <description>YahooFinance coding standard.</description>
+
+    <arg value="nsp" />
+    <arg name="cache" value=".phpcs.cache" />
+
+    <config name="php_version" value="80000" />
+
+    <file>config/</file>
+    <file>src/</file>
+    <file>tests/</file>
+
+    <!--not exactly nice, but working solution-->
+    <rule ref="/root/.composer/vendor/dejwcake/php-code-style/base.phpcs.xml" />
+
+    <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+        <properties>
+            <property name="rootNamespaces" type="array">
+                <element key="src" value="DejwCake\YahooFinance"/>
+                <element key="tests" value="DejwCake\YahooFinance\Tests"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>
