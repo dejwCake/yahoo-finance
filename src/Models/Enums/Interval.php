@@ -21,7 +21,7 @@ class Interval extends Enum
     use EnumAsArrayTrait;
     use EnumForSelectTrait;
 
-    private const MINUTE_1 = '1';
+    private const MINUTE_1 = '1m';
     private const MINUTES_5 = '5m';
     private const MINUTES_15 = '15m';
     private const DAY_1 = '1d';

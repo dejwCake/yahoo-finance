@@ -10,7 +10,9 @@ use DejwCake\YahooFinance\ApiClient\Exceptions\NotFoundException;
 use DejwCake\YahooFinance\ApiClient\Exceptions\UnexpectedContentTypeException;
 use DejwCake\YahooFinance\ApiClient\Exceptions\UnexpectedStatusCodeException;
 use DejwCake\YahooFinance\EndPoints\GetStockHistory;
+use DejwCake\YahooFinance\EndPoints\GetStockQuote;
 use DejwCake\YahooFinance\Models\RequestModels\GetStockHistoryRequest;
+use DejwCake\YahooFinance\Models\RequestModels\GetStockQuoteRequest;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Illuminate\Support\Collection;
 use Psr\Http\Client\ClientInterface;
@@ -26,15 +28,32 @@ class YahooFinanceClient extends Client
     }
 
     /**
+     * Stock history
+     *
      * @throws InternalServerErrorException
      * @throws NotFoundException
      * @throws UnexpectedStatusCodeException
      * @throws UnexpectedContentTypeException
      */
     public function getStockHistory(
-        GetStockHistoryRequest $getStockHistory,
+        GetStockHistoryRequest $getStockHistoryRequest,
         string $fetch = self::FETCH_OBJECT,
     ): ?Collection {
-        return $this->executeEndpoint(new GetStockHistory($getStockHistory), $fetch);
+        return $this->executeEndpoint(new GetStockHistory($getStockHistoryRequest), $fetch);
+    }
+
+    /**
+     * Real time quote data for stocks, ETFs, mutuals funds, etc…
+     *
+     * @throws InternalServerErrorException
+     * @throws NotFoundException
+     * @throws UnexpectedStatusCodeException
+     * @throws UnexpectedContentTypeException
+     */
+    public function getStockQuote(
+        GetStockQuoteRequest $getStockQuoteRequest,
+        string $fetch = self::FETCH_OBJECT,
+    ): ?Collection {
+        return $this->executeEndpoint(new GetStockQuote($getStockQuoteRequest), $fetch);
     }
 }

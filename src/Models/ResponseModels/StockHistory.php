@@ -6,11 +6,12 @@ namespace DejwCake\YahooFinance\Models\ResponseModels;
 
 use Carbon\Carbon;
 use DejwCake\YahooFinance\ApiClient\Exceptions\UnsupportedResponseDataException;
-use DejwCake\YahooFinance\ApiClient\Models\ResponseModel;
+use DejwCake\YahooFinance\ApiClient\Models\ResponseModel as ResponseModelInterface;
 use DejwCake\YahooFinance\Models\CloseValue;
+use DejwCake\YahooFinance\Rules\SizeRule;
 use Illuminate\Support\Collection;
 
-class StockHistory implements ResponseModel
+class StockHistory extends ResponseModel implements ResponseModelInterface
 {
     public function __construct(
         private string $symbol,
@@ -27,8 +28,12 @@ class StockHistory implements ResponseModel
     {
         $collectionData = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
+        if (!isset($collectionData) || !is_array($collectionData)) {
+            throw new UnsupportedResponseDataException();
+        }
+
         return (new Collection($collectionData))->map(
-            static fn (array $stockHistoryData) => static::fromJson(
+            static fn(array $stockHistoryData) => static::fromJson(
                 json_encode($stockHistoryData, JSON_THROW_ON_ERROR),
             ),
         );
@@ -36,45 +41,45 @@ class StockHistory implements ResponseModel
 
     public static function fromJson(string $json): static
     {
-        $stockHistoryData = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-        static::validate($stockHistoryData);
+        $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+        parent::validate($data, self::rules($data));
 
         $closeValues = new Collection();
-        foreach ($stockHistoryData['timestamp'] as $key => $timestamp) {
+        foreach ($data['timestamp'] as $key => $timestamp) {
             $closeValues->push(
-                new CloseValue(Carbon::createFromTimestamp($timestamp), $stockHistoryData['close'][$key]),
+                new CloseValue(Carbon::createFromTimestamp($timestamp), $data['close'][$key]),
             );
         }
 
         return new static(
-            $stockHistoryData['symbol'],
-            $stockHistoryData['previousClose'] ?? null,
-            $stockHistoryData['start'] ?? null,
-            $stockHistoryData['end'] ?? null,
-            $stockHistoryData['chartPreviousClose'],
-            $stockHistoryData['dataGranularity'],
+            $data['symbol'],
+            $data['previousClose'] ?? null,
+            $data['start'] ?? null,
+            $data['end'] ?? null,
+            $data['chartPreviousClose'],
+            $data['dataGranularity'],
             $closeValues,
         );
     }
 
-    private static function validate(array $stockHistoryData): bool
+    public static function rules(array $data): array
     {
-        if (
-            !isset(
-                $stockHistoryData['symbol'],
-                $stockHistoryData['chartPreviousClose'],
-                $stockHistoryData['dataGranularity'],
-                $stockHistoryData['timestamp'],
-                $stockHistoryData['close'],
-            )
-            || !is_array($stockHistoryData['timestamp'])
-            || !is_array($stockHistoryData['close'])
-            || count($stockHistoryData['timestamp']) !== count($stockHistoryData['close'])
-        ) {
-            throw new UnsupportedResponseDataException();
+        $closeCount = 0;
+        if(isset($data['close']) && is_array($data['close'])) {
+            $closeCount = count($data['close']);
+        }
+        $timestampCount = 0;
+        if(isset($data['timestamp']) && is_array($data['timestamp'])) {
+            $timestampCount = count($data['timestamp']);
         }
 
-        return true;
+        return [
+            'symbol' => ['required', 'string'],
+            'chartPreviousClose' => ['required', 'numeric'],
+            'dataGranularity' => ['required', 'numeric'],
+            'timestamp' => ['required', 'array', new SizeRule($closeCount)],
+            'close' => ['required', 'array', new SizeRule($timestampCount)],
+        ];
     }
 
     public function getSymbol(): string

@@ -24,7 +24,7 @@ class GetStockHistoryRequest implements RequestModel
         return $this->symbols;
     }
 
-    public function setSymbols(array $symbols): GetStockHistoryRequest
+    public function setSymbols(array $symbols): self
     {
         $this->symbols = $symbols;
 
@@ -41,7 +41,7 @@ class GetStockHistoryRequest implements RequestModel
         return $this->interval;
     }
 
-    public function setInterval(Interval $interval): GetStockHistoryRequest
+    public function setInterval(Interval $interval): self
     {
         $this->interval = $interval;
 
@@ -53,7 +53,7 @@ class GetStockHistoryRequest implements RequestModel
         return $this->range;
     }
 
-    public function setRange(Range $range): GetStockHistoryRequest
+    public function setRange(Range $range): self
     {
         $this->range = $range;
 
