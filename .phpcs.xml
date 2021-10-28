@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="YahooFinance">
-    <description>YahooFinance coding standard.</description>
+    <description>Yahoo Finance coding standard.</description>
 
     <arg value="nsp" />
     <arg name="cache" value=".phpcs.cache" />
