@@ -1,8 +1,8 @@
 {
     "name": "dejwcake/yahoo-finance",
     "type": "library",
-    "description": "Yahoo Finance Service",
-    "license": "proprietary",
+    "description": "Yahoo Finance Client",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "David Běhal",
