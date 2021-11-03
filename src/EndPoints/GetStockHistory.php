@@ -8,7 +8,7 @@ use DejwCake\YahooFinance\ApiClient\EndPoints\BaseEndpoint;
 use DejwCake\YahooFinance\ApiClient\Exceptions\UnexpectedContentTypeException;
 use DejwCake\YahooFinance\ApiClient\Exceptions\UnexpectedStatusCodeException;
 use DejwCake\YahooFinance\Models\RequestModels\GetStockHistoryRequest;
-use DejwCake\YahooFinance\Models\ResponseModels\StockHistory;
+use DejwCake\YahooFinance\Models\ResponseModels\Factories\StockHistoryFactory;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\StreamFactoryInterface;
 
@@ -52,7 +52,7 @@ class GetStockHistory extends BaseEndpoint
     {
         if ($status === 200) {
             if (str_contains($contentType, 'application/json')) {
-                return StockHistory::collectionFromJson($body);
+                return StockHistoryFactory::collection($body);
             }
 
             throw new UnexpectedContentTypeException($contentType);
