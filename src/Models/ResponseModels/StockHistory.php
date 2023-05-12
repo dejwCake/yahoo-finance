@@ -11,13 +11,13 @@ use Illuminate\Support\Collection;
 class StockHistory implements ResponseModelInterface
 {
     public function __construct(
-        private string $symbol,
-        private ?float $previousClose,
-        private ?Carbon $start,
-        private ?Carbon $end,
-        private ?float $chartPreviousClose,
-        private ?int $dataGranularity,
-        private Collection $closeValues,
+        private readonly string $symbol,
+        private readonly ?float $previousClose,
+        private readonly ?Carbon $start,
+        private readonly ?Carbon $end,
+        private readonly ?float $chartPreviousClose,
+        private readonly ?int $dataGranularity,
+        private readonly Collection $closeValues,
     ) {
     }
 

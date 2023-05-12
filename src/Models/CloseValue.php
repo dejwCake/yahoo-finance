@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class CloseValue
 {
-    public function __construct(private Carbon $date, private float $value)
+    public function __construct(private readonly Carbon $date, private readonly float $value)
     {
     }
 

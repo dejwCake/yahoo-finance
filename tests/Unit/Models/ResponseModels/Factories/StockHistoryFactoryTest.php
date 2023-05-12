@@ -48,7 +48,7 @@ class StockHistoryFactoryTest extends TestCase
         StockHistoryFactory::create($json);
     }
 
-    public function getCases(): array
+    public static function getCases(): array
     {
         return [
             'MissingSymbol' => [

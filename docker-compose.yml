@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   cli:
-    image: dejwcake/php8.0:1
+    image: dejwcake/php8.2:1
     environment:
       APP_ENV: "local"
       XDEBUG_HOST: "host.docker.internal"
@@ -14,13 +14,13 @@ services:
       - composer-cache:/home/harbor/.config/composer/cache
 
   php-qa:
-    image: dejwcake/phpqa:1
+    image: dejwcake/phpqa8.2:2
     volumes:
       - .:/var/www/html:delegated
 
   test:
     container_name: yahoo-finance-test
-    image: dejwcake/php8.0:1
+    image: dejwcake/php8.2:1
     environment:
       ENV: test
     volumes:

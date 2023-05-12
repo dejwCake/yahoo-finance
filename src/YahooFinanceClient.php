@@ -19,7 +19,7 @@ use Psr\Http\Client\ClientInterface;
 
 class YahooFinanceClient extends Client
 {
-    public static function create(ClientInterface $httpClient): YahooFinanceClient
+    public static function create(ClientInterface $httpClient): self
     {
         $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
@@ -43,7 +43,7 @@ class YahooFinanceClient extends Client
     }
 
     /**
-     * Real time quote data for stocks, ETFs, mutuals funds, etc…
+     * Real time quote data for stocks, ETFs, mutual funds, etc…
      *
      * @throws InternalServerErrorException
      * @throws NotFoundException

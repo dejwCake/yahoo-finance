@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="false" backupStaticAttributes="false" bootstrap="vendor/autoload.php" colors="false" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false">
-  <coverage processUncoveredFiles="true">
-    <include>
-      <directory suffix=".php">./src/</directory>
-    </include>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd" backupGlobals="false" bootstrap="vendor/autoload.php" colors="false" processIsolation="false" stopOnFailure="false" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+  <coverage>
     <report>
       <clover outputFile="./tests/_output/coverage.xml"/>
       <php outputFile="./tests/_output/coverage.serialized"/>
@@ -15,7 +12,7 @@
       <directory suffix="Test.php">./tests/Unit</directory>
     </testsuite>
     <testsuite name="Functional">
-        <directory suffix="Test.php">./tests/Functional</directory>
+      <directory suffix="Test.php">./tests/Functional</directory>
     </testsuite>
   </testsuites>
   <php>
@@ -24,4 +21,9 @@
   <logging>
     <junit outputFile="./tests/_output/report.xml"/>
   </logging>
+  <source>
+    <include>
+      <directory suffix=".php">./src/</directory>
+    </include>
+  </source>
 </phpunit>

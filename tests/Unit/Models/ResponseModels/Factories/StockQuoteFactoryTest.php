@@ -113,7 +113,7 @@ class StockQuoteFactoryTest extends TestCase
         StockQuoteFactory::create($json);
     }
 
-    public function getCases(): array
+    public static function getCases(): array
     {
         return [
             'MissingSymbol' => [
