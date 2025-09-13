@@ -9,6 +9,8 @@ use DejwCake\YahooFinance\ApiClient\Models\Factories\ResponseModelFactory as Res
 use DejwCake\YahooFinance\Models\ResponseModels\StockQuote;
 use Illuminate\Support\Collection;
 use JsonException;
+use Psr\Log\LoggerInterface;
+use Throwable;
 
 class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
 {
@@ -21,7 +23,20 @@ class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFac
         'earningsTimestampEnd',
     ];
 
-    public static function collection(string $json): Collection
+    public function __construct(private readonly LoggerInterface $logger)
+    {
+    }
+
+    public static function requiredFields(): array
+    {
+        return [
+            'symbol',
+            'language',
+            'region',
+        ];
+    }
+
+    public function collection(string $json): Collection
     {
         try {
             $collectionData = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
@@ -37,13 +52,19 @@ class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFac
         }
 
         return (new Collection($collectionData['quoteResponse']['result']))->map(
-            static fn (array $stockQuoteData) => static::create(
-                json_encode($stockQuoteData, JSON_THROW_ON_ERROR),
-            ),
-        );
+            function (array $stockQuoteData) {
+                try {
+                    return $this->create(json_encode($stockQuoteData, JSON_THROW_ON_ERROR));
+                } catch (Throwable $throwable) {
+                    $this->logger->error($throwable->getMessage());
+
+                    return null;
+                }
+            },
+        )->filter();
     }
 
-    public static function create(string $json): StockQuote
+    public function create(string $json): StockQuote
     {
         try {
             $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
@@ -51,9 +72,9 @@ class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFac
             throw new UnsupportedResponseDataException('Json response not correct.', $jsonException);
         }
 
-        parent::validateRequired($data, self::requiredFields());
+        $this->validateRequired($data, $this->requiredFields());
 
-        $data = parent::castCarbon($data, self::TIME_STAMP_FIELDS);
+        $data = $this->castCarbon($data, self::TIME_STAMP_FIELDS);
 
         return new StockQuote(
             $data['symbol'],
@@ -132,14 +153,5 @@ class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFac
             $data['tradeable'] ?? null,
             $data['displayName'] ?? null,
         );
-    }
-
-    public static function requiredFields(): array
-    {
-        return [
-            'symbol',
-            'language',
-            'region',
-        ];
     }
 }

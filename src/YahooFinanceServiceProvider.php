@@ -6,6 +6,7 @@ namespace DejwCake\YahooFinance;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
+use Psr\Log\LoggerInterface;
 
 class YahooFinanceServiceProvider extends ServiceProvider
 {
@@ -29,7 +30,7 @@ class YahooFinanceServiceProvider extends ServiceProvider
                     ],
                 ]);
 
-                return YahooFinanceClient::create($httpClient);
+                return YahooFinanceClient::create($httpClient, $this->app->get(LoggerInterface::class));
             },
         );
     }

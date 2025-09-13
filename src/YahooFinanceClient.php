@@ -16,15 +16,27 @@ use DejwCake\YahooFinance\Models\RequestModels\GetStockQuoteRequest;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Illuminate\Support\Collection;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 class YahooFinanceClient extends Client
 {
-    public static function create(ClientInterface $httpClient): self
+    private function __construct(
+        ClientInterface $httpClient,
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory,
+        protected readonly LoggerInterface $logger,
+    ) {
+        parent::__construct($httpClient, $requestFactory, $streamFactory);
+    }
+
+    public static function create(ClientInterface $httpClient, LoggerInterface $logger): self
     {
         $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
 
-        return new static($httpClient, $requestFactory, $streamFactory);
+        return new static($httpClient, $requestFactory, $streamFactory, $logger);
     }
 
     /**
@@ -39,7 +51,7 @@ class YahooFinanceClient extends Client
         GetStockHistoryRequest $getStockHistoryRequest,
         string $fetch = self::FETCH_OBJECT,
     ): ?Collection {
-        return $this->executeEndpoint(new GetStockHistory($getStockHistoryRequest), $fetch);
+        return $this->executeEndpoint(new GetStockHistory($getStockHistoryRequest, $this->logger), $fetch);
     }
 
     /**
@@ -54,6 +66,6 @@ class YahooFinanceClient extends Client
         GetStockQuoteRequest $getStockQuoteRequest,
         string $fetch = self::FETCH_OBJECT,
     ): ?Collection {
-        return $this->executeEndpoint(new GetStockQuote($getStockQuoteRequest), $fetch);
+        return $this->executeEndpoint(new GetStockQuote($getStockQuoteRequest, $this->logger), $fetch);
     }
 }

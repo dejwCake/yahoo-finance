@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 
 interface ResponseModelFactory
 {
-    public static function create(string $json): ResponseModel;
+    public function create(string $json): ResponseModel;
 
-    public static function collection(string $json): Collection;
+    public function collection(string $json): Collection;
 }

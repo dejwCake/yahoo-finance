@@ -11,11 +11,17 @@ use DejwCake\YahooFinance\Models\CloseValue;
 use DejwCake\YahooFinance\Models\ResponseModels\StockHistory;
 use Illuminate\Support\Collection;
 use JsonException;
+use Psr\Log\LoggerInterface;
+use Throwable;
 use TypeError;
 
 class StockHistoryFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
 {
-    public static function collection(string $json): Collection
+    public function __construct(private readonly LoggerInterface $logger)
+    {
+    }
+
+    public function collection(string $json): Collection
     {
         try {
             $collectionData = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
@@ -28,13 +34,19 @@ class StockHistoryFactory extends ResponseModelFactory implements ResponseModelF
         }
 
         return (new Collection($collectionData))->map(
-            static fn (array $stockHistoryData) => static::create(
-                json_encode($stockHistoryData, JSON_THROW_ON_ERROR),
-            ),
-        );
+            function (array $stockHistoryData) {
+                try {
+                    return $this->create(json_encode($stockHistoryData, JSON_THROW_ON_ERROR));
+                } catch (Throwable $throwable) {
+                    $this->logger->error($throwable->getMessage());
+
+                    return null;
+                }
+            },
+        )->filter();
     }
 
-    public static function create(string $json): StockHistory
+    public function create(string $json): StockHistory
     {
         try {
             $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
@@ -42,7 +54,7 @@ class StockHistoryFactory extends ResponseModelFactory implements ResponseModelF
             throw new UnsupportedResponseDataException('Json response not correct.', $jsonException);
         }
 
-        parent::validateRequired($data, self::requiredFields());
+        $this->validateRequired($data, $this->requiredFields());
 
         if (
             !is_array($data['timestamp'])
@@ -74,7 +86,7 @@ class StockHistoryFactory extends ResponseModelFactory implements ResponseModelF
         }
     }
 
-    public static function requiredFields(): array
+    private function requiredFields(): array
     {
         return [
             'symbol',

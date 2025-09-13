@@ -11,12 +11,13 @@ use DejwCake\YahooFinance\Models\RequestModels\GetStockQuoteRequest;
 use DejwCake\YahooFinance\Models\ResponseModels\Factories\StockQuoteFactory;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 class GetStockQuote extends BaseEndpoint
 {
     private const URI = '/v6/finance/quote';
 
-    public function __construct(GetStockQuoteRequest $getStockQuoteRequest)
+    public function __construct(GetStockQuoteRequest $getStockQuoteRequest, private readonly LoggerInterface $logger)
     {
         $this->queryParameters = [
             'symbols' => $getStockQuoteRequest->getSymbolsAsString(),
@@ -52,7 +53,9 @@ class GetStockQuote extends BaseEndpoint
     {
         if ($status === 200) {
             if (str_contains($contentType, 'application/json')) {
-                return StockQuoteFactory::collection($body);
+                $stockQuoteFactory = new StockQuoteFactory($this->logger);
+
+                return $stockQuoteFactory->collection($body);
             }
 
             throw new UnexpectedContentTypeException($contentType);

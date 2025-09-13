@@ -18,6 +18,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 
 // phpcs:disable SlevomatCodingStandard.Files.LineLength.LineTooLong
 class YahooFinanceClientTest extends TestCase
@@ -39,7 +40,10 @@ class YahooFinanceClientTest extends TestCase
             ->willReturn(200);
 
         $this->httpClient = $this->createMock(Client::class);
-        $this->yahooFinanceClient = YahooFinanceClient::create($this->httpClient);
+        $this->yahooFinanceClient = YahooFinanceClient::create(
+            $this->httpClient,
+            $this->createMock(LoggerInterface::class),
+        );
     }
 
     public function testCanGetStockHistory(): void

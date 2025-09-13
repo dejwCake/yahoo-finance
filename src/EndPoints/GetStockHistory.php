@@ -11,13 +11,16 @@ use DejwCake\YahooFinance\Models\RequestModels\GetStockHistoryRequest;
 use DejwCake\YahooFinance\Models\ResponseModels\Factories\StockHistoryFactory;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Log\LoggerInterface;
 
 class GetStockHistory extends BaseEndpoint
 {
     private const URI = '/v8/finance/spark';
 
-    public function __construct(GetStockHistoryRequest $getStockHistoryRequest)
-    {
+    public function __construct(
+        GetStockHistoryRequest $getStockHistoryRequest,
+        private readonly LoggerInterface $logger,
+    ) {
         $this->queryParameters = [
             'symbols' => $getStockHistoryRequest->getSymbolsAsString(),
             'interval' => (string) $getStockHistoryRequest->getInterval(),
@@ -52,7 +55,9 @@ class GetStockHistory extends BaseEndpoint
     {
         if ($status === 200) {
             if (str_contains($contentType, 'application/json')) {
-                return StockHistoryFactory::collection($body);
+                $stockHistoryFactory = new StockHistoryFactory($this->logger);
+
+                return $stockHistoryFactory->collection($body);
             }
 
             throw new UnexpectedContentTypeException($contentType);

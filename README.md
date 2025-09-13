@@ -8,7 +8,9 @@ Composer
 
 ```shell
     docker compose run cli composer install
-    
+```
+
+```shell
     docker compose run php-qa composer normalize
 ```
 
@@ -22,7 +24,12 @@ QA
 
 ```shell
     docker compose run php-qa phpcs -s --colors --extensions=php
+```
+
+```shell
     docker compose run php-qa phpcbf -s --colors --extensions=php
-    
+```
+
+```shell
     docker compose run php-qa phpcs --standard=.phpcs.compatibility.xml --cache=.phpcs.cache --report=junit --report-file=report.xml
 ```

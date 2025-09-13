@@ -9,7 +9,7 @@ use DejwCake\YahooFinance\ApiClient\Exceptions\UnsupportedResponseDataException;
 
 abstract class ResponseModelFactory
 {
-    protected static function validateRequired(array $data, array $requiredFields = [],): void
+    protected function validateRequired(array $data, array $requiredFields = [],): void
     {
         foreach ($requiredFields as $requiredField) {
             if (!isset($data[$requiredField])) {
@@ -18,7 +18,7 @@ abstract class ResponseModelFactory
         }
     }
 
-    protected static function castCarbon(array $data, array $carbonCasts): array
+    protected function castCarbon(array $data, array $carbonCasts): array
     {
         foreach ($carbonCasts as $cast) {
             if (isset($data[$cast])) {
