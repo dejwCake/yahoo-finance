@@ -10,8 +10,11 @@ use DejwCake\YahooFinance\Models\Enums\Range;
 
 final readonly class GetStockHistoryRequest implements RequestModel
 {
-    public function __construct(public array $symbols, public Interval $interval = Interval::DAY_1, public Range $range = Range::MONTH_1)
-    {
+    public function __construct(
+        public array $symbols,
+        public Interval $interval = Interval::DAY_1,
+        public Range $range = Range::MONTH_1,
+    ) {
     }
 
     public function getSymbolsAsString(): string

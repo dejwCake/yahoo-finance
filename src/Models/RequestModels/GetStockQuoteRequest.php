@@ -10,8 +10,11 @@ use DejwCake\YahooFinance\Models\Enums\Region;
 
 final readonly class GetStockQuoteRequest implements RequestModel
 {
-    public function __construct(public array $symbols, public ?Region $region = Region::US, public ?Lang $lang = Lang::EN)
-    {
+    public function __construct(
+        public array $symbols,
+        public ?Region $region = Region::US,
+        public ?Lang $lang = Lang::EN,
+    ) {
     }
 
     public function getSymbolsAsString(): string
