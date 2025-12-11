@@ -22,8 +22,8 @@ class GetStockHistoryRequestTest extends TestCase
     {
         $getStockHistoryRequest = new GetStockHistoryRequest(
             ['ABC', 'DEF', 'GHI', 'JKL'],
-            Interval::MONTH_1(),
-            Range::DAY_1(),
+            Interval::MONTH_1,
+            Range::DAY_1,
         );
 
         $this->assertSame(

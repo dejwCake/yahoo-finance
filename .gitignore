@@ -6,3 +6,5 @@ composer.lock
 .run
 report.xml
 .phpunit.cache
+.phpstan.cache
+docker-compose.override.yml

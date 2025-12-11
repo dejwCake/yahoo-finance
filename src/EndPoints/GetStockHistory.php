@@ -23,8 +23,8 @@ class GetStockHistory extends BaseEndpoint
     ) {
         $this->queryParameters = [
             'symbols' => $getStockHistoryRequest->getSymbolsAsString(),
-            'interval' => (string) $getStockHistoryRequest->getInterval(),
-            'range' => (string) $getStockHistoryRequest->getRange(),
+            'interval' => $getStockHistoryRequest->getInterval()->value,
+            'range' => $getStockHistoryRequest->getRange()->value,
         ];
     }
 

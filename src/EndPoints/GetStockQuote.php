@@ -21,8 +21,8 @@ class GetStockQuote extends BaseEndpoint
     {
         $this->queryParameters = [
             'symbols' => $getStockQuoteRequest->getSymbolsAsString(),
-            'region' => (string) $getStockQuoteRequest->getRegion(),
-            'lang' => (string) $getStockQuoteRequest->getLang(),
+            'region' => $getStockQuoteRequest->getRegion()->value,
+            'lang' => $getStockQuoteRequest->getLang()->value,
         ];
     }
 

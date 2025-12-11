@@ -22,8 +22,8 @@ class GetStockQuoteRequestTest extends TestCase
     {
         $getStockQuoteRequest = new GetStockQuoteRequest(
             ['ABC', 'DEF', 'GHI', 'JKL'],
-            Region::US(),
-            Lang::EN(),
+            Region::US,
+            Lang::EN,
         );
 
         $this->assertSame(

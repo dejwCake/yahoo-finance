@@ -15,8 +15,8 @@ class GetStockHistoryRequest implements RequestModel
 
     public function __construct(private array $symbols, ?Interval $interval = null, ?Range $range = null,)
     {
-        $this->interval = $interval ?? Interval::DAY_1();
-        $this->range = $range ?? Range::MONTH_1();
+        $this->interval = $interval ?? Interval::DAY_1;
+        $this->range = $range ?? Range::MONTH_1;
     }
 
     public function getSymbols(): array
@@ -64,8 +64,8 @@ class GetStockHistoryRequest implements RequestModel
     {
         return [
             'symbols' => $this->getSymbols(),
-            'interval' => $this->getInterval()->getValue(),
-            'range' => $this->getRange()->getValue(),
+            'interval' => $this->getInterval()->value,
+            'range' => $this->getRange()->value,
         ];
     }
 }

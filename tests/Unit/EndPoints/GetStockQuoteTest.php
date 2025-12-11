@@ -30,7 +30,7 @@ class GetStockQuoteTest extends TestCase
     {
         parent::setUp();
 
-        $getStockQuoteRequest = new GetStockQuoteRequest(['AAPL', 'VTI'], Region::US(), Lang::EN());
+        $getStockQuoteRequest = new GetStockQuoteRequest(['AAPL', 'VTI'], Region::US, Lang::EN);
         $this->getStockQuote = new GetStockQuote($getStockQuoteRequest, $this->createMock(LoggerInterface::class));
 
         $this->body = Utils::streamFor(

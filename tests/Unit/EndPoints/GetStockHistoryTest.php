@@ -30,7 +30,7 @@ class GetStockHistoryTest extends TestCase
     {
         parent::setUp();
 
-        $getStockHistoryRequest = new GetStockHistoryRequest(['AAPL', 'VTI'], Interval::DAY_1(), Range::MONTH_1());
+        $getStockHistoryRequest = new GetStockHistoryRequest(['AAPL', 'VTI'], Interval::DAY_1, Range::MONTH_1);
         $this->getStockHistory = new GetStockHistory(
             $getStockHistoryRequest,
             $this->createMock(LoggerInterface::class),

@@ -15,8 +15,8 @@ class GetStockQuoteRequest implements RequestModel
 
     public function __construct(private array $symbols, ?Region $region = null, ?Lang $lang = null)
     {
-        $this->region = $region ?? Region::US();
-        $this->lang = $lang ?? Lang::EN();
+        $this->region = $region ?? Region::US;
+        $this->lang = $lang ?? Lang::EN;
     }
 
     public function getSymbols(): array
@@ -64,8 +64,8 @@ class GetStockQuoteRequest implements RequestModel
     {
         return [
             'symbols' => $this->getSymbols(),
-            'region' => $this->getRegion()->getValue(),
-            'lang' => $this->getLang()->getValue(),
+            'region' => $this->getRegion()->value,
+            'lang' => $this->getLang()->value,
         ];
     }
 }
