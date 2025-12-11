@@ -43,12 +43,12 @@ class GetStockHistoryTest extends TestCase
 
     public function testCanGetUri(): void
     {
-        $this->assertSame('/v8/finance/spark', $this->getStockHistory->getUri());
+        self::assertSame('/v8/finance/spark', $this->getStockHistory->getUri());
     }
 
     public function testCanGetQueryString(): void
     {
-        $this->assertSame('symbols=AAPL%2CVTI&interval=1d&range=1mo', $this->getStockHistory->getQueryString());
+        self::assertSame('symbols=AAPL%2CVTI&interval=1d&range=1mo', $this->getStockHistory->getQueryString());
     }
 
     public function testCanParseResponse(): void
@@ -63,9 +63,9 @@ class GetStockHistoryTest extends TestCase
         $response->method('getBody')
             ->willReturn($this->body);
 
-        $this->assertInstanceOf(Collection::class, $this->getStockHistory->parseResponse($response));
+        self::assertInstanceOf(Collection::class, $this->getStockHistory->parseResponse($response));
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ResponseInterface::class,
             $this->getStockHistory->parseResponse($response, Client::FETCH_RESPONSE),
         );

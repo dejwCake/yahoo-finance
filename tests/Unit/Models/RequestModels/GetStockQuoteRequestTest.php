@@ -15,7 +15,7 @@ class GetStockQuoteRequestTest extends TestCase
     {
         $getStockQuoteRequest = new GetStockQuoteRequest(['ABC', 'DEF', 'GHI', 'JKL']);
 
-        $this->assertSame('ABC,DEF,GHI,JKL', $getStockQuoteRequest->getSymbolsAsString());
+        self::assertSame('ABC,DEF,GHI,JKL', $getStockQuoteRequest->getSymbolsAsString());
     }
 
     public function testCanGetJson(): void
@@ -26,7 +26,7 @@ class GetStockQuoteRequestTest extends TestCase
             Lang::EN,
         );
 
-        $this->assertSame(
+        self::assertSame(
             '{"symbols":["ABC","DEF","GHI","JKL"],"region":"US","lang":"en"}',
             json_encode($getStockQuoteRequest, JSON_THROW_ON_ERROR),
         );

@@ -40,12 +40,12 @@ class GetStockQuoteTest extends TestCase
 
     public function testCanGetUri(): void
     {
-        $this->assertSame('/v6/finance/quote', $this->getStockQuote->getUri());
+        self::assertSame('/v6/finance/quote', $this->getStockQuote->getUri());
     }
 
     public function testCanGetQueryString(): void
     {
-        $this->assertSame('symbols=AAPL%2CVTI&region=US&lang=en', $this->getStockQuote->getQueryString());
+        self::assertSame('symbols=AAPL%2CVTI&region=US&lang=en', $this->getStockQuote->getQueryString());
     }
 
     public function testCanParseResponse(): void
@@ -60,9 +60,9 @@ class GetStockQuoteTest extends TestCase
         $response->method('getBody')
             ->willReturn($this->body);
 
-        $this->assertInstanceOf(Collection::class, $this->getStockQuote->parseResponse($response));
+        self::assertInstanceOf(Collection::class, $this->getStockQuote->parseResponse($response));
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ResponseInterface::class,
             $this->getStockQuote->parseResponse($response, Client::FETCH_RESPONSE),
         );
@@ -83,7 +83,7 @@ class GetStockQuoteTest extends TestCase
         $response->method('getBody')
             ->willReturn($this->body);
 
-        $this->expectException($exception);
+        self::expectException($exception);
 
         $this->getStockQuote->parseResponse($response);
     }

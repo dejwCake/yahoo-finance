@@ -15,7 +15,7 @@ class GetStockHistoryRequestTest extends TestCase
     {
         $getStockHistoryRequest = new GetStockHistoryRequest(['ABC', 'DEF', 'GHI', 'JKL']);
 
-        $this->assertSame('ABC,DEF,GHI,JKL', $getStockHistoryRequest->getSymbolsAsString());
+        self::assertSame('ABC,DEF,GHI,JKL', $getStockHistoryRequest->getSymbolsAsString());
     }
 
     public function testCanGetJson(): void
@@ -26,7 +26,7 @@ class GetStockHistoryRequestTest extends TestCase
             Range::DAY_1,
         );
 
-        $this->assertSame(
+        self::assertSame(
             '{"symbols":["ABC","DEF","GHI","JKL"],"interval":"1mo","range":"1d"}',
             json_encode($getStockHistoryRequest, JSON_THROW_ON_ERROR),
         );

@@ -60,7 +60,7 @@ class YahooFinanceClientTest extends TestCase
         $getStockHistoryRequest = new GetStockHistoryRequest(['AAPL', 'VTI'], Interval::DAY_1, Range::MONTH_1);
         $stockHistoryCollection = $this->yahooFinanceClient->getStockHistory($getStockHistoryRequest);
 
-        $this->assertInstanceOf(Collection::class, $stockHistoryCollection);
+        self::assertInstanceOf(Collection::class, $stockHistoryCollection);
     }
 
     public function testCanGetStockQuote(): void
@@ -77,6 +77,6 @@ class YahooFinanceClientTest extends TestCase
         $getStockQuoteRequest = new GetStockQuoteRequest(['AAPL', 'VTI'], Region::US, Lang::EN);
         $stockQuoteCollection = $this->yahooFinanceClient->getStockQuote($getStockQuoteRequest);
 
-        $this->assertInstanceOf(Collection::class, $stockQuoteCollection);
+        self::assertInstanceOf(Collection::class, $stockQuoteCollection);
     }
 }
