@@ -1,10 +1,8 @@
-.phpunit.result.cache
+/.idea
+/.phpunit.cache
+/.phpstan.cache
+/.run
 /vendor
-composer.lock
-.idea
 .phpcs.cache
-.run
-report.xml
-.phpunit.cache
-.phpstan.cache
+composer.lock
 docker-compose.override.yml
