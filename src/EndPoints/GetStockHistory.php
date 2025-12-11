@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\LoggerInterface;
 
-class GetStockHistory extends BaseEndpoint
+final class GetStockHistory extends BaseEndpoint
 {
     private const URI = '/v8/finance/spark';
 
@@ -23,8 +23,8 @@ class GetStockHistory extends BaseEndpoint
     ) {
         $this->queryParameters = [
             'symbols' => $getStockHistoryRequest->getSymbolsAsString(),
-            'interval' => (string) $getStockHistoryRequest->getInterval(),
-            'range' => (string) $getStockHistoryRequest->getRange(),
+            'interval' => $getStockHistoryRequest->interval->value,
+            'range' => $getStockHistoryRequest->range->value,
         ];
     }
 

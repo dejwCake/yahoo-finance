@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\LoggerInterface;
 
-class GetStockQuote extends BaseEndpoint
+final class GetStockQuote extends BaseEndpoint
 {
     private const URI = '/v6/finance/quote';
 
@@ -21,8 +21,8 @@ class GetStockQuote extends BaseEndpoint
     {
         $this->queryParameters = [
             'symbols' => $getStockQuoteRequest->getSymbolsAsString(),
-            'region' => (string) $getStockQuoteRequest->getRegion(),
-            'lang' => (string) $getStockQuoteRequest->getLang(),
+            'region' => $getStockQuoteRequest->region->value,
+            'lang' => $getStockQuoteRequest->lang->value,
         ];
     }
 

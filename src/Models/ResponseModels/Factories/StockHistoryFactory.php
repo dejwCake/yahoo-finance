@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DejwCake\YahooFinance\Models\ResponseModels\Factories;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use DejwCake\YahooFinance\ApiClient\Exceptions\UnsupportedResponseDataException;
 use DejwCake\YahooFinance\ApiClient\Models\Factories\ResponseModelFactory as ResponseModelFactoryInterface;
 use DejwCake\YahooFinance\Models\CloseValue;
@@ -15,9 +15,9 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 use TypeError;
 
-class StockHistoryFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
+final readonly class StockHistoryFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
 {
-    public function __construct(private readonly LoggerInterface $logger)
+    public function __construct(private LoggerInterface $logger)
     {
     }
 
@@ -67,7 +67,7 @@ class StockHistoryFactory extends ResponseModelFactory implements ResponseModelF
         $closeValues = new Collection();
         foreach ($data['timestamp'] as $key => $timestamp) {
             $closeValues->push(
-                new CloseValue(Carbon::createFromTimestamp($timestamp), $data['close'][$key]),
+                new CloseValue(CarbonImmutable::createFromTimestamp($timestamp), $data['close'][$key]),
             );
         }
 

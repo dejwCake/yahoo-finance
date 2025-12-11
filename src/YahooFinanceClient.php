@@ -20,7 +20,7 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\LoggerInterface;
 
-class YahooFinanceClient extends Client
+final class YahooFinanceClient extends Client
 {
     private function __construct(
         ClientInterface $httpClient,

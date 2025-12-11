@@ -14,7 +14,7 @@ class YahooFinanceServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/yahoo-finance.php' => config_path('yahoo-finance.php'),
+                __DIR__ . '/../config/yahoo-finance.php' => $this->app->configPath('yahoo-finance.php'),
             ], 'config');
         }
 
