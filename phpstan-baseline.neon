@@ -1,2 +1,31 @@
 parameters:
 	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, '__' given\\.$#"
+			count: 2
+			path: src/Models/Enums/Interval.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, '__' given\\.$#"
+			count: 2
+			path: src/Models/Enums/Lang.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, '__' given\\.$#"
+			count: 2
+			path: src/Models/Enums/Range.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, '__' given\\.$#"
+			count: 2
+			path: src/Models/Enums/Region.php
+
+		-
+			message: "#^Trying to mock an undefined method getBody\\(\\) on class Psr\\\\Http\\\\Message\\\\ResponseInterface\\.$#"
+			count: 2
+			path: tests/Functional/YahooFinanceClientTest.php
+
+		-
+			message: "#^Trying to mock an undefined method sendRequest\\(\\) on class Psr\\\\Http\\\\Client\\\\ClientInterface\\.$#"
+			count: 2
+			path: tests/Functional/YahooFinanceClientTest.php

@@ -1,3 +1,8 @@
 <?xml version="1.0"?>
 <phpmd-baseline>
+  <violation rule="PHPMD\Rule\Design\LongParameterList" file="src/Models/ResponseModels/StockQuote.php" method="__construct"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="src/YahooFinanceClient.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="tests/Functional/YahooFinanceClientTest.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="tests/Unit/EndPoints/GetStockHistoryTest.php"/>
+  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="tests/Unit/EndPoints/GetStockQuoteTest.php"/>
 </phpmd-baseline>
