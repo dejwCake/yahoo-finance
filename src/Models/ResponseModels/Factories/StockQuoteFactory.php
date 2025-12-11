@@ -12,7 +12,7 @@ use JsonException;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-readonly class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
+final readonly class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
 {
     private const TIME_STAMP_FIELDS = [
         'regularMarketTime',

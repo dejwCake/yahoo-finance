@@ -6,7 +6,7 @@ namespace DejwCake\YahooFinance\Models;
 
 use Carbon\CarbonInterface;
 
-readonly class CloseValue
+final readonly class CloseValue
 {
     public function __construct(public CarbonInterface $date, public float $value)
     {

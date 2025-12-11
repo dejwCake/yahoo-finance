@@ -15,7 +15,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 use TypeError;
 
-readonly class StockHistoryFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
+final readonly class StockHistoryFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
 {
     public function __construct(private LoggerInterface $logger)
     {

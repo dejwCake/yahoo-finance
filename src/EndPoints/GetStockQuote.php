@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\LoggerInterface;
 
-class GetStockQuote extends BaseEndpoint
+final class GetStockQuote extends BaseEndpoint
 {
     private const URI = '/v6/finance/quote';
 

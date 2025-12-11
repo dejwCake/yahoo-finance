@@ -8,7 +8,7 @@ use DejwCake\YahooFinance\ApiClient\Models\RequestModel;
 use DejwCake\YahooFinance\Models\Enums\Lang;
 use DejwCake\YahooFinance\Models\Enums\Region;
 
-readonly class GetStockQuoteRequest implements RequestModel
+final readonly class GetStockQuoteRequest implements RequestModel
 {
     public function __construct(public array $symbols, public ?Region $region = Region::US, public ?Lang $lang = Lang::EN)
     {

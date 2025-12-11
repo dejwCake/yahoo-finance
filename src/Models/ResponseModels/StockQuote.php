@@ -7,7 +7,7 @@ namespace DejwCake\YahooFinance\Models\ResponseModels;
 use Carbon\CarbonInterface;
 use DejwCake\YahooFinance\ApiClient\Models\ResponseModel as ResponseModelInterface;
 
-readonly class StockQuote implements ResponseModelInterface
+final readonly class StockQuote implements ResponseModelInterface
 {
     public function __construct(
         public string $symbol,

@@ -8,7 +8,7 @@ use Carbon\CarbonInterface;
 use DejwCake\YahooFinance\ApiClient\Models\ResponseModel as ResponseModelInterface;
 use Illuminate\Support\Collection;
 
-readonly class StockHistory implements ResponseModelInterface
+final readonly class StockHistory implements ResponseModelInterface
 {
     public function __construct(
         public string $symbol,
