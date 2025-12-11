@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace DejwCake\YahooFinance\Models\ResponseModels\Factories;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use DejwCake\YahooFinance\ApiClient\Exceptions\UnsupportedResponseDataException;
 
-abstract class ResponseModelFactory
+abstract readonly class ResponseModelFactory
 {
     protected function validateRequired(array $data, array $requiredFields = [],): void
     {
@@ -22,7 +22,7 @@ abstract class ResponseModelFactory
     {
         foreach ($carbonCasts as $cast) {
             if (isset($data[$cast])) {
-                $data[$cast] = Carbon::createFromTimestamp($data[$cast]);
+                $data[$cast] = CarbonImmutable::createFromTimestamp($data[$cast]);
             }
         }
 

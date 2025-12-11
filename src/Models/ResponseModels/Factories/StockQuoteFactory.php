@@ -12,7 +12,7 @@ use JsonException;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
+readonly class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFactoryInterface
 {
     private const TIME_STAMP_FIELDS = [
         'regularMarketTime',
@@ -23,7 +23,7 @@ class StockQuoteFactory extends ResponseModelFactory implements ResponseModelFac
         'earningsTimestampEnd',
     ];
 
-    public function __construct(private readonly LoggerInterface $logger)
+    public function __construct(private LoggerInterface $logger)
     {
     }
 
