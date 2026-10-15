@@ -44,8 +44,8 @@ final class YahooFinanceClient extends Client
      *
      * @throws InternalServerErrorException
      * @throws NotFoundException
-     * @throws UnexpectedStatusCodeException
      * @throws UnexpectedContentTypeException
+     * @throws UnexpectedStatusCodeException
      */
     public function getStockHistory(
         GetStockHistoryRequest $getStockHistoryRequest,
@@ -59,8 +59,8 @@ final class YahooFinanceClient extends Client
      *
      * @throws InternalServerErrorException
      * @throws NotFoundException
-     * @throws UnexpectedStatusCodeException
      * @throws UnexpectedContentTypeException
+     * @throws UnexpectedStatusCodeException
      */
     public function getStockQuote(
         GetStockQuoteRequest $getStockQuoteRequest,

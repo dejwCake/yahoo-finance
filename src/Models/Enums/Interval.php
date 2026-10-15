@@ -9,8 +9,8 @@ use DejwCake\YahooFinance\Models\Enums\Traits\EnumForSelectTrait;
 
 enum Interval: string
 {
-    use EnumForSelectTrait;
     use EnumAsArrayTrait;
+    use EnumForSelectTrait;
 
     case MINUTE_1 = '1m';
     case MINUTES_5 = '5m';

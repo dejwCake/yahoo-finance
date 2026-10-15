@@ -15,6 +15,7 @@ use DejwCake\YahooFinance\Models\Enums\Range;
 use DejwCake\YahooFinance\Models\RequestModels\GetStockHistoryRequest;
 use GuzzleHttp\Psr7\Utils;
 use Illuminate\Support\Collection;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -33,7 +34,7 @@ class GetStockHistoryTest extends TestCase
         $getStockHistoryRequest = new GetStockHistoryRequest(['AAPL', 'VTI'], Interval::DAY_1, Range::MONTH_1);
         $this->getStockHistory = new GetStockHistory(
             $getStockHistoryRequest,
-            $this->createMock(LoggerInterface::class),
+            $this->createStub(LoggerInterface::class),
         );
 
         $this->body = Utils::streamFor(
@@ -53,7 +54,7 @@ class GetStockHistoryTest extends TestCase
 
     public function testCanParseResponse(): void
     {
-        $response = $this->createMock(ResponseInterface::class);
+        $response = $this->createStub(ResponseInterface::class);
         $response->method('hasHeader')
             ->willReturn(true);
         $response->method('getHeader')
@@ -71,12 +72,10 @@ class GetStockHistoryTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider getExceptionCases
-     */
+    #[DataProvider('getExceptionCases')]
     public function testCanGetExceptionBasedOnStatusCode(int $code, string $exception): void
     {
-        $response = $this->createMock(ResponseInterface::class);
+        $response = $this->createStub(ResponseInterface::class);
         $response->method('hasHeader')
             ->willReturn(true);
         $response->method('getHeader')
@@ -93,7 +92,7 @@ class GetStockHistoryTest extends TestCase
 
     public function testCanGetExceptionOnWrongContentType(): void
     {
-        $response = $this->createMock(ResponseInterface::class);
+        $response = $this->createStub(ResponseInterface::class);
         $response->method('hasHeader')
             ->willReturn(true);
         $response->method('getHeader')

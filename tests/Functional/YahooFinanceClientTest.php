@@ -14,7 +14,7 @@ use DejwCake\YahooFinance\YahooFinanceClient;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Utils;
 use Illuminate\Support\Collection;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -23,15 +23,15 @@ use Psr\Log\LoggerInterface;
 // phpcs:disable SlevomatCodingStandard.Files.LineLength.LineTooLong
 class YahooFinanceClientTest extends TestCase
 {
-    private MockObject|ClientInterface $httpClient;
-    private MockObject|ResponseInterface $response;
+    private Stub|ClientInterface $httpClient;
+    private Stub|ResponseInterface $response;
     private YahooFinanceClient $yahooFinanceClient;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->response = $this->createMock(ResponseInterface::class);
+        $this->response = $this->createStub(ResponseInterface::class);
         $this->response->method('hasHeader')
             ->willReturn(true);
         $this->response->method('getHeader')
@@ -39,10 +39,10 @@ class YahooFinanceClientTest extends TestCase
         $this->response->method('getStatusCode')
             ->willReturn(200);
 
-        $this->httpClient = $this->createMock(Client::class);
+        $this->httpClient = $this->createStub(Client::class);
         $this->yahooFinanceClient = YahooFinanceClient::create(
             $this->httpClient,
-            $this->createMock(LoggerInterface::class),
+            $this->createStub(LoggerInterface::class),
         );
     }
 

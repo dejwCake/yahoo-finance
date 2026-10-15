@@ -9,8 +9,8 @@ use DejwCake\YahooFinance\Models\Enums\Traits\EnumForSelectTrait;
 
 enum Region: string
 {
-    use EnumForSelectTrait;
     use EnumAsArrayTrait;
+    use EnumForSelectTrait;
 
     case US = 'US';
     case AU = 'AU';

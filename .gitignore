@@ -1,6 +1,7 @@
 /.idea
 /.phpunit.cache
 /.phpstan.cache
+.phpmd.result-cache.php
 /.run
 /vendor
 .phpcs.cache

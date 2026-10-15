@@ -9,8 +9,8 @@ use DejwCake\YahooFinance\Models\Enums\Traits\EnumForSelectTrait;
 
 enum Range: string
 {
-    use EnumForSelectTrait;
     use EnumAsArrayTrait;
+    use EnumForSelectTrait;
 
     case DAY_1 = '1d';
     case DAYS_5 = '5d';

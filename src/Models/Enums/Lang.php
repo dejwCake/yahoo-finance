@@ -9,8 +9,8 @@ use DejwCake\YahooFinance\Models\Enums\Traits\EnumForSelectTrait;
 
 enum Lang: string
 {
-    use EnumForSelectTrait;
     use EnumAsArrayTrait;
+    use EnumForSelectTrait;
 
     case EN = 'en';
     case FR = 'fr';

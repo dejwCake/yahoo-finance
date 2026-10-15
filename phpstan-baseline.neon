@@ -1,31 +1,115 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, '__' given\\.$#"
+			message: '#^Out of 5 possible constant types, only 0 \- 0\.0 %% actually have it\. Add more constant types to get over 75 %%$#'
+			identifier: typeCoverage.constantTypeCoverage
+			count: 2
+			path: src/ApiClient/Client.php
+
+		-
+			message: '#^Method DejwCake\\YahooFinance\\EndPoints\\GetStockHistory\:\:transformResponseBody\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/EndPoints/GetStockHistory.php
+
+		-
+			message: '#^Out of 5 possible constant types, only 0 \- 0\.0 %% actually have it\. Add more constant types to get over 75 %%$#'
+			identifier: typeCoverage.constantTypeCoverage
+			count: 1
+			path: src/EndPoints/GetStockHistory.php
+
+		-
+			message: '#^Method DejwCake\\YahooFinance\\EndPoints\\GetStockQuote\:\:transformResponseBody\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/EndPoints/GetStockQuote.php
+
+		-
+			message: '#^Out of 5 possible constant types, only 0 \- 0\.0 %% actually have it\. Add more constant types to get over 75 %%$#'
+			identifier: typeCoverage.constantTypeCoverage
+			count: 1
+			path: src/EndPoints/GetStockQuote.php
+
+		-
+			message: '#^Call to function method_exists\(\) with ''DejwCake\\\\YahooFinance\\\\Models\\\\Enums\\\\Interval'' and ''cases'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Models/Enums/Interval.php
+
+		-
+			message: '#^Instanceof between DejwCake\\YahooFinance\\Models\\Enums\\Interval\:\:DAY_1\|DejwCake\\YahooFinance\\Models\\Enums\\Interval\:\:MINUTE_1\|DejwCake\\YahooFinance\\Models\\Enums\\Interval\:\:MINUTES_15\|DejwCake\\YahooFinance\\Models\\Enums\\Interval\:\:MINUTES_5\|DejwCake\\YahooFinance\\Models\\Enums\\Interval\:\:MONTH_1\|DejwCake\\YahooFinance\\Models\\Enums\\Interval\:\:WEEK_1 and UnitEnum will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Models/Enums/Interval.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function call_user_func expects callable\(\)\: mixed, ''__'' given\.$#'
+			identifier: argument.type
 			count: 2
 			path: src/Models/Enums/Interval.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, '__' given\\.$#"
+			message: '#^Call to function method_exists\(\) with ''DejwCake\\\\YahooFinance\\\\Models\\\\Enums\\\\Lang'' and ''cases'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Models/Enums/Lang.php
+
+		-
+			message: '#^Instanceof between DejwCake\\YahooFinance\\Models\\Enums\\Lang\:\:DE\|DejwCake\\YahooFinance\\Models\\Enums\\Lang\:\:EN\|DejwCake\\YahooFinance\\Models\\Enums\\Lang\:\:ES\|DejwCake\\YahooFinance\\Models\\Enums\\Lang\:\:FR\|DejwCake\\YahooFinance\\Models\\Enums\\Lang\:\:IT\|DejwCake\\YahooFinance\\Models\\Enums\\Lang\:\:ZH and UnitEnum will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Models/Enums/Lang.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function call_user_func expects callable\(\)\: mixed, ''__'' given\.$#'
+			identifier: argument.type
 			count: 2
 			path: src/Models/Enums/Lang.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, '__' given\\.$#"
+			message: '#^Call to function method_exists\(\) with ''DejwCake\\\\YahooFinance\\\\Models\\\\Enums\\\\Range'' and ''cases'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Models/Enums/Range.php
+
+		-
+			message: '#^Instanceof between DejwCake\\YahooFinance\\Models\\Enums\\Range\:\:DAY_1\|DejwCake\\YahooFinance\\Models\\Enums\\Range\:\:DAYS_5\|DejwCake\\YahooFinance\\Models\\Enums\\Range\:\:MAX\|DejwCake\\YahooFinance\\Models\\Enums\\Range\:\:MONTH_1\|DejwCake\\YahooFinance\\Models\\Enums\\Range\:\:MONTHS_3\|DejwCake\\YahooFinance\\Models\\Enums\\Range\:\:MONTHS_6\|DejwCake\\YahooFinance\\Models\\Enums\\Range\:\:YEAR_1\|DejwCake\\YahooFinance\\Models\\Enums\\Range\:\:YEARS_5 and UnitEnum will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Models/Enums/Range.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function call_user_func expects callable\(\)\: mixed, ''__'' given\.$#'
+			identifier: argument.type
 			count: 2
 			path: src/Models/Enums/Range.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, '__' given\\.$#"
+			message: '#^Call to function method_exists\(\) with ''DejwCake\\\\YahooFinance\\\\Models\\\\Enums\\\\Region'' and ''cases'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Models/Enums/Region.php
+
+		-
+			message: '#^Instanceof between DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:AU\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:CA\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:DE\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:ES\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:FR\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:GB\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:HK\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:IN\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:IT\|DejwCake\\YahooFinance\\Models\\Enums\\Region\:\:US and UnitEnum will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Models/Enums/Region.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function call_user_func expects callable\(\)\: mixed, ''__'' given\.$#'
+			identifier: argument.type
 			count: 2
 			path: src/Models/Enums/Region.php
 
 		-
-			message: "#^Trying to mock an undefined method getBody\\(\\) on class Psr\\\\Http\\\\Message\\\\ResponseInterface\\.$#"
-			count: 2
-			path: tests/Functional/YahooFinanceClientTest.php
+			message: '#^Call to function assert\(\) with true will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Models/Enums/Traits/EnumForSelectTrait.php
 
 		-
-			message: "#^Trying to mock an undefined method sendRequest\\(\\) on class Psr\\\\Http\\\\Client\\\\ClientInterface\\.$#"
-			count: 2
-			path: tests/Functional/YahooFinanceClientTest.php
+			message: '#^Out of 5 possible constant types, only 0 \- 0\.0 %% actually have it\. Add more constant types to get over 75 %%$#'
+			identifier: typeCoverage.constantTypeCoverage
+			count: 1
+			path: src/Models/ResponseModels/Factories/StockQuoteFactory.php
